@@ -27,7 +27,7 @@ Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_
 
 ### With API Key (Optional)
 
-For higher rate limits, you can provide an API key:
+For higher rate limits, you can provide an API key via environment variable:
 
 ```json
 {
@@ -43,6 +43,9 @@ For higher rate limits, you can provide an API key:
 }
 ```
 
+Optional:
+- `MARKDOWN_NEW_TIMEOUT_MS`: request timeout in milliseconds for upstream API calls (default: `30000`)
+
 ## Available Tools
 
 ### `convert_url_to_markdown`
@@ -51,7 +54,7 @@ Convert a remote file URL to Markdown.
 
 **Parameters:**
 - `url` (string, required): The URL of the remote file to convert
-- `api_key` (string, optional): API key for higher rate limits
+- `api_key` (string, optional): API key for higher rate limits (if omitted, uses `MARKDOWN_NEW_API_KEY` when available)
 
 **Example:**
 ```
@@ -64,7 +67,7 @@ Convert a local file to Markdown.
 
 **Parameters:**
 - `file_path` (string, required): The absolute path to the local file
-- `api_key` (string, optional): API key for higher rate limits
+- `api_key` (string, optional): API key for higher rate limits (if omitted, uses `MARKDOWN_NEW_API_KEY` when available)
 
 **Example:**
 ```
@@ -77,7 +80,7 @@ Convert a remote file URL to JSON with metadata (title, tokens, duration, etc).
 
 **Parameters:**
 - `url` (string, required): The URL of the remote file
-- `api_key` (string, optional): API key for higher rate limits
+- `api_key` (string, optional): API key for higher rate limits (if omitted, uses `MARKDOWN_NEW_API_KEY` when available)
 
 ## Supported Formats
 

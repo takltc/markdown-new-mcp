@@ -1,11 +1,15 @@
 {
   "name": "markdown-new-mcp",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "MCP server for markdown.new file conversion API - convert PDF, DOCX, XLSX, images and 20+ formats to Markdown",
   "type": "module",
   "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "bin": {
-    "markdown-new-mcp": "./dist/index.js"
+    "markdown-new-mcp": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
