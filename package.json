@@ -1,0 +1,38 @@
+{
+  "name": "markdown-new-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for markdown.new file conversion API - convert PDF, DOCX, XLSX, images and 20+ formats to Markdown",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "markdown-new-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "markdown",
+    "file-conversion",
+    "pdf-to-markdown",
+    "docx-to-markdown",
+    "xlsx-to-markdown"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3",
+    "tsx": "^4.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
