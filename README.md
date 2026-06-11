@@ -10,16 +10,31 @@ npm install markdown-new-mcp
 
 ## Usage
 
-### With Claude Desktop
+### With Claude Desktop or Claude Code
 
-Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
+For stdio MCP clients, use `npx -y` so the server starts under Node.js and preserves the JSON-RPC stdio stream. Add this to your Claude config:
 
 ```json
 {
   "mcpServers": {
     "markdown-new": {
       "command": "npx",
-      "args": ["markdown-new-mcp"]
+      "args": ["-y", "markdown-new-mcp@latest"]
+    }
+  }
+}
+```
+
+### With opencode
+
+Add this to the `mcp` section of `~/.config/opencode/opencode.json`:
+
+```json
+{
+  "mcp": {
+    "markdown-new": {
+      "type": "local",
+      "command": ["npx", "-y", "markdown-new-mcp@latest"]
     }
   }
 }
@@ -34,7 +49,7 @@ For higher rate limits, you can provide an API key via environment variable:
   "mcpServers": {
     "markdown-new": {
       "command": "npx",
-      "args": ["markdown-new-mcp"],
+      "args": ["-y", "markdown-new-mcp@latest"],
       "env": {
         "MARKDOWN_NEW_API_KEY": "mk_your_api_key_here"
       }
@@ -50,11 +65,11 @@ Optional:
 
 ### `convert_url_to_markdown`
 
-Convert a remote file URL to Markdown.
+Convert a remote file URL to clean Markdown text. Supports PDF, DOCX, XLSX, images, and 20+ formats.
 
 **Parameters:**
-- `url` (string, required): The URL of the remote file to convert
-- `api_key` (string, optional): API key for higher rate limits (if omitted, uses `MARKDOWN_NEW_API_KEY` when available)
+- `url` (string, required): HTTP or HTTPS URL of the remote file
+- `api_key` (string, optional): API key for higher rate limits; the server also reads `MARKDOWN_NEW_API_KEY`
 
 **Example:**
 ```
@@ -63,11 +78,11 @@ Convert this PDF to markdown: https://example.com/document.pdf
 
 ### `convert_file_to_markdown`
 
-Convert a local file to Markdown.
+Convert a local file to clean Markdown text. The path must be absolute and visible to the server process. Supports PDF, DOCX, XLSX, images, and 20+ formats.
 
 **Parameters:**
 - `file_path` (string, required): The absolute path to the local file
-- `api_key` (string, optional): API key for higher rate limits (if omitted, uses `MARKDOWN_NEW_API_KEY` when available)
+- `api_key` (string, optional): API key for higher rate limits; the server also reads `MARKDOWN_NEW_API_KEY`
 
 **Example:**
 ```
@@ -76,11 +91,11 @@ Convert /path/to/document.pdf to markdown
 
 ### `convert_url_to_json`
 
-Convert a remote file URL to JSON with metadata (title, tokens, duration, etc).
+Convert a remote file URL to structured JSON, including metadata such as title, tokens, and duration. Supports PDF, DOCX, XLSX, images, and 20+ formats.
 
 **Parameters:**
 - `url` (string, required): The URL of the remote file
-- `api_key` (string, optional): API key for higher rate limits (if omitted, uses `MARKDOWN_NEW_API_KEY` when available)
+- `api_key` (string, optional): API key for higher rate limits; the server also reads `MARKDOWN_NEW_API_KEY`
 
 ## Supported Formats
 
@@ -106,6 +121,10 @@ npm run build
 
 # Run locally
 npm run dev
+
+# Smoke test the stdio MCP server
+npm run build
+npm run smoke:stdio -- node dist/index.js
 ```
 
 ## License
